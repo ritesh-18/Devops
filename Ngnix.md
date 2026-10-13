@@ -93,4 +93,39 @@ sudo apt install certbot python3-certbot-nginx -y
 # Obtain and automatically apply the SSL certificate
 sudo certbot --nginx -d your-domain.com -d www.your-domain.com
 ```
+# -----------------EASY WAY--------------------
+### Change directly inside the nginx.conf file 
+```bash
+events{
+}
+
+http{
+
+ server {
+    listen 80;
+    server_name ec2-43-204-149-133.ap-south-1.compute.amazonaws.com; # Use _ if you don't have a domain yet
+
+    location / {
+        proxy_pass http://127.0.0.1:3000; # The local port where your backend runs
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_cache_bypass $http_upgrade;
+    }
+  }
+# multiple server you can add if you have more app running on the same machine and also you can use this machine only for reverse proxy and for API-gateway.
+}
+
+```
+
+
+
+
+
+
+
 
