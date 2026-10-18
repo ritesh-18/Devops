@@ -1,0 +1,21 @@
+# write a ci logic first then cd
+
+# jobs , on(events) , name(generic name)
+
+
+name : Demo workflow
+
+on: 
+    workflow_dispatch:
+
+jobs:
+  demo:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print a messgae
+      - run: echo "demo message"
+      - name: Print date
+      - run: echo date       
+
+     

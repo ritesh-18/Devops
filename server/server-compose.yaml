@@ -1,0 +1,10 @@
+
+services :
+   node-server:
+    build:
+      context: ./
+      #  run the docker file directly
+      dockerfile : Dockerfile
+    name : node-server-latest  
+    ports: 
+      - "7777:3000"
